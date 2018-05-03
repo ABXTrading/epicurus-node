@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "6.9"
+services:
+  - redis-server
+before_install:
+  - npm i -g mocha@2.5.3 typescript@1.8.7 tslint@3.10.2

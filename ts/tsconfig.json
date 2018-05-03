@@ -1,0 +1,22 @@
+{
+  "version": "1.8.7",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "declaration": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "../js",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "rootDir": "./",
+    "types": ["node", "mocha", "chai"]
+  },
+  "compileOnSave": true,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

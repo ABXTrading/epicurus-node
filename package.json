@@ -1,0 +1,44 @@
+{
+  "name": "epicurus-node",
+  "version": "0.1.8",
+  "description": "Redis request/response and PubSub sugar",
+  "main": "js/index.js",
+  "types": "js/index.d.ts",
+  "files": [ "js/" ],
+  "scripts": {
+    "prepublish": "npm run lint && rm -rf js/* && tsc --sourcemap -p ts/",
+    "lint": "tslint 'ts/**/*.ts'",
+    "test": "npm run compile && mocha js/**/*.spec.js",
+    "compile": "npm run lint && rm -rf js/* && tsc --sourcemap -p ts/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bullioncapital/epicurus.git"
+  },
+  "keywords": [
+    "Redis"
+  ],
+  "author": "ABX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bullioncapital/epicurus/issues"
+  },
+  "homepage": "https://github.com/bullioncapital/epicurus#readme",
+  "dependencies": {
+    "@types/bluebird": "3.5.20",
+    "@types/redis": "2.8.6",
+    "@types/uuid": "3.4.3",
+    "@types/node": "8.0.20",
+    "bluebird": "3.5.0",
+    "redis": "2.7.1",
+    "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "@types/chai": "4.0.3",
+    "@types/mocha": "2.2.41",
+    "chai": "4.0.1",
+    "typescript": "2.8.1",
+    "tslint": "5.5.0",
+    "mocha": "3.5.0"
+  }
+}
