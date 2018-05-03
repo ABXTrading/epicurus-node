@@ -9,7 +9,7 @@ bluebird.promisifyAll(redis.Multi.prototype)
 export default function Epicurus (redisConfig: EpicurusRedisConfig = {
   host: 'localhost',
   port: 6379
-}) {
+}): EpicurusPublicInterface {
   // A separate subscription Redis client is required as once a client has
   // called SUBSCRIBE, it is put into a slave mode the does not allow any other
   // kind of action
@@ -38,4 +38,11 @@ export default function Epicurus (redisConfig: EpicurusRedisConfig = {
   }
 }
 
-export type EpicurusPublicInterface = ReturnType<typeof Epicurus>
+export type EpicurusPublicInterface = {
+  subscribe: <T = any>(channel: string, callback: subscribeCallback<T>) => Promise<void>
+  publish: (channel: string, body: any) => void
+  server: <T = any, S = any>(channel: string, callback: serverCallback<T, S>) => Promise<void>
+  request: <T = any>(channel: string, body: any) => Promise<T>
+  shutdown: () => void
+  close: () => void
+}
