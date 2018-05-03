@@ -7,8 +7,8 @@ Epicurus provides a simple Request/Response and Publish/Subscribe abstraction on
 ### Instantiation
 Instantiate Epicurus by giving it credentials to your Redis database.
 
-```
-let epicurus = Epicurus('yourRedisHost', 6379)
+```ts
+const epicurus = Epicurus('yourRedisHost', 6379)
 ```
 
 Epicurus is not a singleton. It is simply a function that instantiates an instance of the redis client, and gives the returned functions access to this instance. Each time you instantiate Epicurus, you create a new Redis client. This isn't usually a problem, but if you wish to use Epicurus through your project, it is sensible to instantiate and export the instance from one location.
@@ -18,7 +18,7 @@ The true power of Epicurus is highly performant request/response communication b
 
 The request/response abstraction utilises the BRPOP mechanism of Redis to generate server listeners. These servers respond to the requesters by pushing to uniquely identified list.
 
-```
+```ts
 epicurus.server('sampleEndpoint', function (request, callback) {
   expect(request.body).to.eql('boo')
   callback(null, {msg: 'hello'})
@@ -33,7 +33,7 @@ Epicurus provides a convenience wrapper around Redis PUBSUB, that allows the dec
 
 This plays particularly with TypeScript enums.
 
-```
+```ts
 epicurus.subscribe('sampleChannel', (msgReceived) => {
   expect(msgReceived).to.eql({hello: 'world', channel: 'sampleChannel'})
 })
