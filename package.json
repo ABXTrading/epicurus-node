@@ -4,7 +4,9 @@
   "description": "Redis request/response and PubSub sugar",
   "main": "js/index.js",
   "types": "js/index.d.ts",
-  "files": [ "js/" ],
+  "files": [
+    "js/"
+  ],
   "scripts": {
     "prepublish": "npm run lint && rm -rf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'",

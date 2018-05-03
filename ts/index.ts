@@ -37,3 +37,5 @@ export default function Epicurus (redisConfig: EpicurusRedisConfig = {
     }
   }
 }
+
+export type EpicurusPublicInterface = ReturnType<typeof Epicurus>
