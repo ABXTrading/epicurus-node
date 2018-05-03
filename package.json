@@ -1,6 +1,6 @@
 {
   "name": "epicurus-node",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Redis request/response and PubSub sugar",
   "main": "js/index.js",
   "types": "js/index.d.ts",
