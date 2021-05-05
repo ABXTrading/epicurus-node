@@ -77,8 +77,15 @@ export async function server<T, S>(redisClient, channel: string, callback: serve
 
   function brpop () {
     clientClone.brpop(channel, 0, async function (_null, popInfo) {
+      if (_null) {
+        console.error('BRPOP ERROR', _null)
+      }
       if (enableServers) {
         brpop()
+      }
+
+      if (!popInfo) {
+        return
       }
 
       const reqId = popInfo[1]
@@ -90,8 +97,8 @@ export async function server<T, S>(redisClient, channel: string, callback: serve
       if (req.ttl > Date.now() - config.requestValidityPeriod) {
         callback(req.body, async function (error, result) {
           const errorRef = error
-          ? { name: error.name, message: error.message, stack: error.stack, severity: error.severity || 1 }
-          : null
+            ? { name: error.name, message: error.message, stack: error.stack, severity: error.severity || 1 }
+            : null
 
           let redisResponse: EpicurusResponse = {
             error: errorRef,
