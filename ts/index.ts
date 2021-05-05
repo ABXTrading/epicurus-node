@@ -3,6 +3,7 @@ import { request, server, closeAllClients, enableServers, disableServers } from 
 import { EpicurusRedisConfig, serverCallback, subscribeCallback } from './interface'
 import * as redis from 'redis'
 import * as bluebird from 'bluebird'
+import { RedisClient } from 'redis'
 bluebird.promisifyAll(redis.RedisClient.prototype)
 bluebird.promisifyAll(redis.Multi.prototype)
 
@@ -20,6 +21,8 @@ export default function Epicurus (redisConfig: EpicurusRedisConfig = {
   enableServers()
 
   return {
+    getRedisClient: () => redisClient,
+    getRedisSubClient: () => redisSub,
     subscribe: <T = any>(channel: string, callback: subscribeCallback<T>) => subscribe(redisSub, channel, callback),
     publish: (channel: string, body: any) => publish(redisClient, channel, body),
     server: <T = any, S = any>(channel: string, callback: serverCallback<T, S>) => server(redisClient, channel, callback),
@@ -39,6 +42,8 @@ export default function Epicurus (redisConfig: EpicurusRedisConfig = {
 }
 
 export type EpicurusPublicInterface = {
+  getRedisClient: () => RedisClient
+  getRedisSubClient: () => RedisClient
   subscribe: <T = any>(channel: string, callback: subscribeCallback<T>) => Promise<void>
   publish: (channel: string, body: any) => void
   server: <T = any, S = any>(channel: string, callback: serverCallback<T, S>) => Promise<void>
